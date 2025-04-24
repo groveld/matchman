@@ -7,3 +7,11 @@ end_of_line = lf
 charset = utf-8
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+[{Dockerfile*,**.yml}]
+indent_style = space
+indent_size = 2
+
+[{**.sh,root/etc/s6-overlay/s6-rc.d/**,root/etc/cont-init.d/**,root/etc/services.d/**}]
+indent_style = space
+indent_size = 4
