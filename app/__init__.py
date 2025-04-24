@@ -25,8 +25,10 @@ def create_app(config_class=Config):
             c.CLUBNAME,
             SUM(s.INNERTEN) AS BULLSEYE,
             pt.TOTAL AS SCORE,
-            RANK() OVER (PARTITION BY ca.DESCRIPTION ORDER BY SUM(s.INNERTEN) DESC,
-            pt.TOTAL DESC) AS RANK
+            RANK() OVER (
+                PARTITION BY ca.DESCRIPTION 
+                ORDER BY pt.TOTAL DESC, SUM(s.INNERTEN) DESC
+            ) AS RANK
         FROM
             PARTICIPANTS pa
             JOIN PERSONS p ON pa.PERSONID = p.PERSONID
