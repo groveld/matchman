@@ -23,9 +23,6 @@ jobs:
       - name: Build wheel
         run: python -m build
 
-      - name: List dist directory
-        run: ls -lah dist
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
