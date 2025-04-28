@@ -24,7 +24,7 @@ jobs:
         run: python -m build
 
       - name: List dist directory
-        run: ls -lah
+        run: ls -lah dist
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
