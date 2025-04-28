@@ -3,27 +3,42 @@
 FROM ghcr.io/linuxserver/baseimage-alpine:3.21
 
 # set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="groveld"
 
 # environment settings
-ARG RADARR_BRANCH="master"
-ENV XDG_CONFIG_HOME="/config/xdg"
+ENV FIREBIRD_VERSION=5.0.2.1613
+ENV MATCHMAN_VERSION=0.1.0
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
+# install packages
 RUN \
-    echo "**** install packages ****" && \
-    apk add -U --upgrade --no-cache \
+    echo "**** install build packages ****" && \
+    apk add --no-cache --upgrade --virtual=build-dependencies \
+    tar \
+    ca-certificates \
+    libstdc++ \
+    build-base \
+    python3-dev && \
+    echo "**** install runtime packages ****" && \
+    apk add --no-cache --upgrade \
     python3 \
-    echo "**** install pyload ****" && \
-    mkdir -p /app/matchman/bin && \
+    gunicorn && \
+    echo "**** install firebird ****" && \
+    echo "**** install matchman ****" && \
+    python3 -m venv /lsiopy && \
+    pip install -U --no-cache-dir \
+    pip \
+    wheel && \
+    pip install -U --no-cache-dir -r requirements.txt && \
     echo "**** cleanup ****" && \
+    apk del --purge \
+    build-dependencies && \
     rm -rf \
     /root/.cache \
     /tmp/*
 
-# add local files
+# copy local files
 COPY root/ /
 
 # ports and volumes
