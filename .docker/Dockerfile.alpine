@@ -1,0 +1,45 @@
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-alpine:3.21
+
+# set version label
+LABEL maintainer="groveld"
+
+# environment settings
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# copy local files
+COPY root/ /
+
+# install packages
+RUN \
+    echo "**** install build packages ****" && \
+    apk add --no-cache --upgrade --virtual=build-dependencies \
+    python3-dev && \
+    echo "**** install runtime packages ****" && \
+    apk add --no-cache --upgrade \
+    gcompat \
+    python3 \
+    py3-gunicorn && \
+    echo "**** install libtommath ****" && \
+    ln -s /usr/lib/libtommath.so.1.2.1 /usr/lib/libtommath.so.1 && \
+    echo "**** install firebird ****" && \
+    ln -s /usr/lib/libfbclient.so.5.0.2 /usr/lib/libfbclient.so.2 && \
+    ln -s /usr/lib/libfbclient.so.2 /usr/lib/libfbclient.so && \
+    echo "**** install matchman ****" && \
+    python3 -m venv /lsiopy && \
+    pip install --upgrade --no-cache-dir \
+    pip \
+    wheel && \
+    pip install --upgrade --no-cache-dir /app/matchman-0.1.0-py3-none-any.whl && \
+    echo "**** cleanup ****" && \
+    apk del --purge \
+    build-dependencies && \
+    rm -rf \
+    /root/.cache \
+    /tmp/*
+
+# ports and volumes
+EXPOSE 3000
+VOLUME /config
