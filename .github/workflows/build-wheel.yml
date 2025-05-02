@@ -1,11 +1,11 @@
 ---
-name: Build and Publish Wheel
+name: Build and Publish Python Wheel
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  python_wheel:
     runs-on: ubuntu-latest
 
     steps:
