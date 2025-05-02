@@ -23,7 +23,7 @@
    ```bash
    python -m venv .venv
    source .venv/bin/activate   # Windows: `.venv\Scripts\activate`
-   python -m pip install --upgrade pip setuptools wheel
+   python -m pip install --upgrade pip
    ```
 
 3. Install dependencies
@@ -42,7 +42,7 @@
 
 ## Steps to build a wheel
 
-1. **Install Required Tools:** Ensure you have `setuptools` and `wheel` installed:
+1. **Install Required Tools:** Ensure you have `build` installed:
 
    ```bash
    python -m pip install --upgrade build
