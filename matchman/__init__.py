@@ -1,22 +1,6 @@
-from firebird.driver import connect, driver_config
 from flask import Flask, redirect, render_template, request
 
-# Register Firebird server
-srv_cfg = """[local]
-host = 172.25.10.10
-user = SYSDBA
-password = FirebirdRootPassword
-"""
-driver_config.register_server("local", srv_cfg)
-
-# Register database
-db_cfg = """[matchmanager]
-server = local
-database = /var/lib/firebird/data/svduel.fdb
-protocol = inet
-charset = utf8
-"""
-driver_config.register_database("matchmanager", db_cfg)
+from .database import get_connection
 
 
 def create_app():
@@ -46,7 +30,7 @@ def create_app():
             C.BEGINDATE DESC
         """
 
-        connection = connect("matchmanager")
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query)
         columns = [desc[0] for desc in cursor.description]
@@ -106,7 +90,7 @@ def create_app():
             % competition_id
         )
 
-        connection = connect("matchmanager")
+        connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query)
         columns = [desc[0] for desc in cursor.description]

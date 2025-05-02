@@ -1,5 +1,7 @@
 # MatchManager
 
+[Firebird Driver Documentation](https://firebird-driver.readthedocs.io/en/stable/index.html)
+
 ## TODO
 
 - [ ] Add logging
