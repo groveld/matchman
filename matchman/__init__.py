@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request
 
-from .database import get_connection
+from matchman.database import get_connection
 
 
 def create_app():

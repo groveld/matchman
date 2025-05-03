@@ -11,6 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 # copy local files
 COPY root/ /
+COPY dist/ /app/
 
 # install packages
 RUN \

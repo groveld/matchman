@@ -17,7 +17,6 @@ instance/
 htmlcov/
 
 build/
-dist/
 *.egg-info/
 
-.docker/compose.yml
+compose.yml

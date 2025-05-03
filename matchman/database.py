@@ -1,15 +1,22 @@
-from firebird.driver import NetProtocol, connect, driver_config
+from firebird.driver import connect, driver_config
 
-from .config import Firebird
+# Register Firebird server
+srv_cfg = """[docker]
+host = 172.25.10.10
+user = SYSDBA
+password = FirebirdRootPassword
+"""
+driver_config.register_server("docker", srv_cfg)
 
-# Apply Firebird configuration
-driver_config.server_defaults.host.value = Firebird.host
-driver_config.server_defaults.port.value = Firebird.port
-driver_config.server_defaults.user.value = Firebird.user
-driver_config.server_defaults.password.value = Firebird.password
-driver_config.db_defaults.protocol.value = NetProtocol[Firebird.protocol.upper()]
-driver_config.db_defaults.charset.value = Firebird.charset.upper()
+# Register database
+db_cfg = """[matchmanager]
+server = docker
+database = /var/lib/firebird/data/svduel.fdb
+protocol = inet
+charset = utf8
+"""
+driver_config.register_database("matchmanager", db_cfg)
 
 
 def get_connection():
-    return connect(Firebird.database)
+    return connect("matchmanager")
