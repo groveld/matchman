@@ -37,8 +37,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade -r requirements.txt
+          python -m pip install -r requirements.txt
 
       - name: Lint Code Base
         uses: github/super-linter/slim@v5
@@ -46,6 +45,7 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
+          EXCLUDED_PATHS: dist,bin
           LINTER_RULES_PATH: /
           VALIDATE_PYTHON_MYPY: false
           PYTHON_BLACK_CONFIG_FILE: pyproject.toml
