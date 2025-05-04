@@ -45,7 +45,7 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
-          EXCLUDED_PATHS: dist,bin
+          FILTER_REGEX_EXCLUDE: ".*(/bin/|/dist/|/root/opt/|/root/usr/).*"
           LINTER_RULES_PATH: /
           VALIDATE_PYTHON_MYPY: false
           PYTHON_BLACK_CONFIG_FILE: pyproject.toml
