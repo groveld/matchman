@@ -24,6 +24,9 @@ RUN \
     libtommath1 && \
     echo "**** install matchman ****" && \
     pip install --upgrade --no-cache-dir /app/matchman-0.1.0-py3-none-any.whl --break-system-packages && \
+    echo "**** set file permissions ****" && \
+    chmod +x /etc/s6-overlay/s6-rc.d/init-matchman-config/run && \
+    chmod +x /etc/s6-overlay/s6-rc.d/svc-matchman/run && \
     echo "**** clean up ****" && \
     apt-get clean && \
     rm -rf \
