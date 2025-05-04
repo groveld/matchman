@@ -1,22 +1,23 @@
 from firebird.driver import connect, driver_config
 
-# Register Firebird server
-srv_cfg = """[docker]
-host = 172.25.10.10
-user = SYSDBA
-password = FirebirdRootPassword
-"""
-driver_config.register_server("docker", srv_cfg)
+from matchman.config import FirebirdConfig
 
-# Register database
-db_cfg = """[matchmanager]
-server = docker
-database = /var/lib/firebird/data/svduel.fdb
-protocol = inet
-charset = utf8
+srv_cfg = f"""[server]
+host = {FirebirdConfig.host}
+port = {FirebirdConfig.port}
+user = {FirebirdConfig.user}
+password = {FirebirdConfig.password}
 """
-driver_config.register_database("matchmanager", db_cfg)
+driver_config.register_server("server", srv_cfg)
+
+db_cfg = f"""[database]
+server = server
+database = {FirebirdConfig.database}
+protocol = {FirebirdConfig.protocol}
+charset = {FirebirdConfig.charset}
+"""
+driver_config.register_database("database", db_cfg)
 
 
 def get_connection():
-    return connect("matchmanager")
+    return connect("database")

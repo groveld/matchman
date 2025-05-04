@@ -1,10 +1,15 @@
+"""Initialize the Flask application."""
+
 from flask import Flask, redirect, render_template, request
 
+from matchman.config import Config
 from matchman.database import get_connection
 
 
-def create_app():
+def create_app(config_class: object = Config) -> Flask:
+    """Initialize and configure the Flask application."""
     app = Flask(__name__)
+    app.config.from_object(config_class)
 
     @app.route("/", methods=["GET"])
     def index():
