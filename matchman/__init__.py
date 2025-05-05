@@ -18,12 +18,13 @@ def create_app(config_class: object = Config) -> Flask:
 
 def register_blueprints(app):
     from matchman.competitions import competitions
-    from matchman.edit import edit
+
+    # from matchman.edit import edit
     from matchman.main import main
 
     app.register_blueprint(main, url_prefix="/")
     app.register_blueprint(competitions, url_prefix="/competitions")
-    app.register_blueprint(edit, url_prefix="/edit")
+    # app.register_blueprint(edit, url_prefix="/edit")
 
 
 def initialize_extensions(app):
