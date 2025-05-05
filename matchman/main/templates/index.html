@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Welcome to MatchManager{% endblock %}
+{% block content %}
+<section class="text-center py-16 bg-blue-600 text-white">
+  <h1 class="text-4xl font-bold mb-4">Welcome to MatchManager</h1>
+  <p class="text-lg mb-6">
+    Your ultimate platform for managing competitions and matches effortlessly.
+  </p>
+  <a
+    href="/competitions"
+    class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200"
+    >Get Started</a
+  >
+</section>
+
+<section class="container mx-auto py-16">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="text-center">
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Feature 1"
+        class="mx-auto mb-4"
+      />
+      <h2 class="text-xl font-bold mb-2">Manage Competitions</h2>
+      <p>
+        Easily create, edit, and manage competitions with our intuitive tools.
+      </p>
+    </div>
+    <div class="text-center">
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Feature 2"
+        class="mx-auto mb-4"
+      />
+      <h2 class="text-xl font-bold mb-2">Track Matches</h2>
+      <p>Keep track of match schedules, results, and standings in real-time.</p>
+    </div>
+    <div class="text-center">
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Feature 3"
+        class="mx-auto mb-4"
+      />
+      <h2 class="text-xl font-bold mb-2">Stay Connected</h2>
+      <p>Share updates and stay connected with participants and fans.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-100 py-16">
+  <div class="container mx-auto text-center">
+    <h2 class="text-2xl font-bold mb-4">Join Us Today</h2>
+    <p class="mb-6">
+      Sign up now and take your competition management to the next level.
+    </p>
+    <a
+      href="/signup"
+      class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700"
+      >Sign Up</a
+    >
+  </div>
+</section>
+{% endblock %}

@@ -8,6 +8,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     """Base configuration class."""
 
+    SECRET_KEY = os.getenv("SECRET_KEY", "my_precious")
+    DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "t")
+
 
 class FirebirdConfig:
     """Configuration for Firebird database connection."""
