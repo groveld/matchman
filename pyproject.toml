@@ -1,3 +1,35 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matchman"
+authors = [
+    { name = "Martin Groeneveld" }
+]
+description = "A command line tool to match and merge records from different sources."
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "firebird-driver",
+    "Flask"
+]
+
+[project.urls]
+Source = "https://github.com/groveld/matchman"
+Issues = "https://github.com/groveld/matchman/issues"
+
+[project.scripts]
+matchman = "matchman.run:main"
+
+[tool.setuptools.packages.find]
+include = ["matchman*"]
+
 [tool.black]
 line-length = 88
 target-version = ['py311']
