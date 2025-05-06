@@ -1,41 +1,38 @@
 {% extends "base.html" %} {% block title %} Competitie Overzicht {% endblock %}
 {% block content %}
-<div class="container mx-auto py-8">
-  <h1 class="text-3xl font-semibold mb-8 text-center">Competitie Overzicht</h1>
-  <div class="overflow-x-auto">
-    {% for year, year_group in competitions|groupby("COMPETITION_YEAR")|reverse
-    %}
-    <h2 class="text-2xl font-semibold text-blue-600 mb-4">{{ year }}</h2>
-    <table
-      class="table-auto w-full border-collapse border border-gray-300 shadow-md mb-4"
-    >
-      <thead>
-        <tr class="bg-gray-200">
-          <th class="border border-gray-300 px-4 py-2 text-left w-32">Datum</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Competitie</th>
-          <th class="border border-gray-300 px-4 py-2 text-left">Deelnemers</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for competition in year_group %}
-        <tr
-          class="bg-white hover:bg-gray-100 cursor-pointer"
-          onclick="window.location.href='/competitions/{{ competition.COMPETITIONID }}?view=competition'"
-        >
-          <td class="border border-gray-300 px-4 py-2">
-            {{ competition.COMPETITION_DATE }}
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            {{ competition.COMPETITION }}
-          </td>
-          <td class="border border-gray-300 px-4 py-2">
-            {{ competition.PARTICIPANTS }}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% endfor %}
-  </div>
+<h1 class="text-3xl font-semibold mb-8 text-center">Competitie Overzicht</h1>
+<div class="overflow-x-auto">
+  {% for year, year_group in competitions|groupby("COMPETITION_YEAR")|reverse %}
+  <h2 class="text-2xl font-semibold text-blue-600 mb-4">{{ year }}</h2>
+  <table
+    class="table-auto w-full border-collapse border border-gray-300 shadow-md mb-4"
+  >
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="border border-gray-300 px-4 py-2 text-left w-32">Datum</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Competitie</th>
+        <th class="border border-gray-300 px-4 py-2 text-left">Deelnemers</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for competition in year_group %}
+      <tr
+        class="bg-white hover:bg-gray-100 cursor-pointer"
+        onclick="window.location.href='/competitions/{{ competition.COMPETITIONID }}?view=competition'"
+      >
+        <td class="border border-gray-300 px-4 py-2">
+          {{ competition.COMPETITION_DATE }}
+        </td>
+        <td class="border border-gray-300 px-4 py-2">
+          {{ competition.COMPETITION }}
+        </td>
+        <td class="border border-gray-300 px-4 py-2">
+          {{ competition.PARTICIPANTS }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endfor %}
 </div>
 {% endblock %}
