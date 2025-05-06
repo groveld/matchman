@@ -35,7 +35,7 @@
 4. Run the application
 
    ```bash
-   python ./matchman/app.py
+   python -m matchman.run
    ```
 
 5. Open your browser and go to `http://127.0.0.1:3000/`
@@ -67,5 +67,5 @@
 ### Gunicorn
 
 ```bash
-gunicorn --bind "0.0.0.0:8000" --workers 4 --threads 8 --worker-class gthread --timeout 120 matchman.cli:app
+gunicorn --bind "0.0.0.0:8000" matchman.run:app
 ```
