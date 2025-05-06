@@ -28,8 +28,11 @@ Issues = "https://github.com/groveld/matchman/issues"
 [project.scripts]
 matchman = "matchman.run:main"
 
-[tool.setuptools.packages.find]
-exclude = ["**/__pycache__"]
+[tool.setuptools]
+packages = ["matchman*"]
+
+[tool.setuptools.package-data]
+matchman = ["**/*"]
 
 [tool.black]
 line-length = 88
